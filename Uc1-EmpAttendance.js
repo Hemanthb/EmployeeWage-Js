@@ -44,3 +44,54 @@ function wageCalculate(wage){
     totWage += wage
 }
 console.log("Total wage calculated using sum of daily wage array --> Rs."+totWage);
+
+//UC-7a -> Calculate wage using reduce function
+function FindTotalWage(dailyWage,totalWage){
+    return totalWage+=dailyWage;
+}
+console.log("UC - 7(a) Total Wage calculated using reduce function --> Rs."+empDailyWageArray.reduce(FindTotalWage,0));
+
+//Uc-7b -> Using Array Map Function to display day and wage
+let dayCount = 0;
+function MapDayAndWage(wage){
+    dayCount++;
+    return dayCount+" = "+wage;
+}
+let empDailyWageMapArray = empDailyWageArray.map(MapDayAndWage);
+console.log("UC - 7(b) ->> Mapping of Day and DailyWage:")
+empDailyWageMapArray.forEach(element =>
+    console.log(element));
+
+//UC - 7(c) - Filter out only Fulltime wage
+function FilterFullTimeWage(wage){
+    return wage.includes("160");
+}
+let fullTimeWagesArray = empDailyWageMapArray.filter(FilterFullTimeWage) 
+console.log("UC - 7(c) - Using Filter function to get full time wage")
+console.log(fullTimeWagesArray);
+
+//UC - 7(d) - Find first occurence Of Full time wage
+let firstFullTimeWagePos = empDailyWageMapArray.find(FilterFullTimeWage);
+console.log("UC - 7(d) - 1st Full time Daily Wage occurence is at - "+firstFullTimeWagePos);
+
+//UC - 7(e) - Check every value of fullTimewagearray is full time wage
+let checkFullTimeWage = fullTimeWagesArray.every(FilterFullTimeWage);
+console.log("UC - 7(e) - Every value of Full time wage array is rightly full time wage :"+checkFullTimeWage);
+
+//UC - 7(f) - Checks for Part Time wages in EmpEageArray
+function FindPartTimeWage(wage){
+    return wage.includes("80");
+}
+let isPartTimeWageExist = empDailyWageMapArray.some(FindPartTimeWage);
+console.log("UC - 7(f) - Does Part Time wage found in EmpWageArray? - "+isPartTimeWageExist);
+
+//UC - 7(g) - Finding the No of Days Employee Worked
+function EmployeeWorkedDays(noOfDays,wage){
+    if(wage > 0){
+        return noOfDays+1;
+    }
+    return noOfDays;
+}
+let empWorkedDays = empDailyWageArray.reduce(EmployeeWorkedDays,0)
+console.log("UC - 7(g) - Number Of days Employee was present are -");
+console.log(empWorkedDays);
