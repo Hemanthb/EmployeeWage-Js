@@ -1,9 +1,12 @@
+const IS_ABSENT = 0, IS_PART_TIME = 1, IS_FULL_TIME = 2, TOTAL_WORKING_HRS = 160;
+const WAGE_PER_HRS = 20;
+const TOTAL_WORKING_DAYS = 20;
 {
-    var IS_ABSENT = 0, IS_PART_TIME = 1, IS_FULL_TIME = 2;
-    const WAGE_PER_HRS = 20;
-    const TOTAL_WORKING_DAYS = 20;
+    
     let totalWorkHrs = 0;
-    for(let i =1;i<=TOTAL_WORKING_DAYS;i++){
+    let i = 0;
+    while(i < TOTAL_WORKING_DAYS && TOTAL_WORKING_HRS > totalWorkHrs){
+        i++;
         let dayWorkHrs = GetWorkingHrs();
         let DailyWage = WAGE_PER_HRS * dayWorkHrs;
         totalWorkHrs += dayWorkHrs;
