@@ -47,7 +47,7 @@ console.log("Total wage calculated using sum of daily wage array --> Rs."+totWag
 
 //UC-7a -> Calculate wage using reduce function
 function FindTotalWage(dailyWage,totalWage){
-    return totalWage+=dailyWage;
+    return totalWage=totalWage+dailyWage;
 }
 console.log("UC - 7(a) Total Wage calculated using reduce function --> Rs."+empDailyWageArray.reduce(FindTotalWage,0));
 
@@ -95,3 +95,17 @@ function EmployeeWorkedDays(noOfDays,wage){
 let empWorkedDays = empDailyWageArray.reduce(EmployeeWorkedDays,0)
 console.log("UC - 7(g) - Number Of days Employee was present are -");
 console.log(empWorkedDays);
+
+//UC -8 - storing Day->DailywAge->TotalWageTillDate
+ let day_count = 0;
+ let empSalaryForAMonth = 0;
+ function DailyAndTotalWage(wage)
+ {
+     day_count++;
+     empSalaryForAMonth += wage;
+     return day_count + " = " + wage + " = " + empSalaryForAMonth;
+ } 
+ let dailyAndTotalWageArray = empDailyWageArray.map(DailyAndTotalWage);
+ console.log(dailyAndTotalWageArray);
+console.log("UC - 8 - Map of Day->DailywAge->TotalWageTillDate :")
+console.log(Array.from(empDailyWageMapArray.values()).reduce(FindTotalWage,0))
