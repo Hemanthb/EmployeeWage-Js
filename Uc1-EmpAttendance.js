@@ -2,6 +2,7 @@ const IS_ABSENT = 0, IS_PART_TIME = 1, IS_FULL_TIME = 2, TOTAL_WORKING_HRS = 160
 const WAGE_PER_HRS = 20;
 const TOTAL_WORKING_DAYS = 20;
 let empDailyWageArray = new Array();
+let empWorkHrsMapArray = new Map();
 {
     
     let totalWorkHrs = 0;
@@ -13,7 +14,8 @@ let empDailyWageArray = new Array();
         totalWorkHrs += dayWorkHrs;
         console.log("Day -"+i+" wage is - Rs. "+DailyWage);
         empDailyWageArray.push(DailyWage);
-
+        empWorkHrsMapArray.set(i,dayWorkHrs);
+        
     }
     let empWage = CalculateWage(totalWorkHrs);
     console.log("Emp Wage for a Month is -> Rs. "+empWage+" and total work hrs is "+totalWorkHrs+"hrs");
@@ -109,3 +111,38 @@ console.log(empWorkedDays);
  console.log(dailyAndTotalWageArray);
 console.log("UC - 8 - Map of Day->DailywAge->TotalWageTillDate :")
 console.log(Array.from(empDailyWageMapArray.values()).reduce(FindTotalWage,0))
+
+//UC -9 - Arrow Function
+const findTotal = (totalValue,dailyValue) => {
+    return totalValue+dailyValue;
+}
+let totalHrsWorked = Array.from(empWorkHrsMapArray.values()).filter(empHrs=>empHrs!="0").reduce(findTotal,0);
+console.log("UC - 9(a) - Total Hrs Worked found using Arrow function -> "+totalHrsWorked);
+let totalWages = empDailyWageArray.filter(empwage=>empwage>0).reduce(findTotal,0);
+console.log("UC - 9(a) - Total wage for the month found using Arrow function -> "+totalWages);
+
+//UC - 9(b)
+let fullWorkingDays = new Array();
+let PartWorkingDays = new Array();
+let noWorkingDays = new Array();
+
+empWorkHrsMapArray.forEach((value, key, map) =>{
+    if(value == 8)
+    {
+        fullWorkingDays.push(key);
+    }
+    else if(value == 4)
+    {
+        PartWorkingDays.push(key);
+    }
+    else
+    {
+        noWorkingDays.push(key);
+    }
+});
+console.log("Days Employee worked Full Time:");
+console.log(fullWorkingDays);
+console.log("Days Employee worked Part Time: ");
+console.log(PartWorkingDays);
+console.log("Days Employee Absented: ");
+console.log(noWorkingDays);
