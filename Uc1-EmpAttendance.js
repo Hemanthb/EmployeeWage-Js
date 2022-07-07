@@ -64,4 +64,34 @@ function GetWorkingHrs(){
     }
     console.log("Hours Worked and Wages Earned by an Employee: " + empDailyHrsAndWageArray);
     console.log("Employee Wage for a Month: " + empSalaryForAMonth);
+
+    //UC11(a) - Calculating Total Hours and Total Wage
+    let totalWage = empDailyHrsAndWageArray.filter(x => x.dailyWage > 0).reduce((wage, x) => wage += x.dailyWage, 0);
+    let totalHours  = empDailyHrsAndWageArray.filter(x => x.dailyHours > 0).reduce((hour, x) => hour += x.dailyHours, 0);
+    console.log("Employee Worked for: " + totalHours + " Hours and Earned: " + totalWage);
+
+    //UC11(b) - Checking Number of Full Working Hours
+    let fullWorkHrsArray = new Array();
+    //empDailyHrsAndWageArray.filter(x => x.dailyHours == 8).forEach(x => console.log(x.toString()));
+    empDailyHrsAndWageArray.filter(x => x.dailyHours == 8).forEach(x => fullWorkHrsArray.push(x));
+    console.log("\nNo. Of Days Employee Worked FullDay: " + fullWorkHrsArray.length);
+    console.log(fullWorkHrsArray.toString());
+
+     //UC11(c) - Finding Number of Part Time Working Hours
+     console.log("\nNo. Of Days Employee Worked PartTime:");
+     let partTimeDays = empDailyHrsAndWageArray.filter(x => x.dailyHours == 4).map(x => x.toString());
+     console.log(partTimeDays);
+ 
+     //UC11(d) - Finding Number of Non Working Hours
+     console.log("\nDays Employee Absented :");
+     let nonWorkingDays =  empDailyHrsAndWageArray.filter(x => x.dailyHours == 0).map(x => x.toString());
+     console.log(nonWorkingDays);
+ 
+     //UC11(e) - Finding First occurence of a Full Time Wage
+     let firstFullTimeWage = empDailyHrsAndWageArray.find(x => x.dailyWage == 160)
+     console.log("\nEmployee's First Full time Wage Occured at: " + firstFullTimeWage.toString());
+ 
+     //UC11(f) - Checking no.of Days Employee Worked
+     let workingDays = empDailyHrsAndWageArray.filter(x => x.dailyHours > 0);
+     console.log("\nNumber of Days Employee Worked in a Month: " + workingDays.length);
 }
